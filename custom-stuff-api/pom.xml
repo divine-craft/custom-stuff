@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>custom-stuff</artifactId>
+        <groupId>ru.divinecraft</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>custom-stuff-api</artifactId>
+
+    <name>CustomStuff API</name>
+
+    <properties>
+        <rootPackage>ru.divinecraft.customstuff.api</rootPackage>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <configuration>
+                    <!--
+                    Note: Although most APIs should be preserved in their original package
+                    so that it is runtime's responsibility to provide them,
+                    NBT API is intended *only* for shading thus its version gets distributed
+                    with the custom-stuff-api itself in the NBT package
+                    -->
+                    <artifactSet>
+                        <includes>
+                            <include>de.tr7zw:item-nbt-api</include>
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <relocation>
+                            <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                            <shadedPattern>${rootPackage}.nbt</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- Runtime -->
+        <dependency>
+            <groupId>com.destroystokyo.paper</groupId>
+            <artifactId>paper-api</artifactId>
+        </dependency>
+
+        <!-- Libraries -->
+        <dependency>
+            <groupId>ru.progrm-jarvis</groupId>
+            <artifactId>java-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ru.progrm-jarvis.minecraft</groupId>
+            <artifactId>minecraft-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ru.progrm-jarvis.minecraft</groupId>
+            <artifactId>fake-entity-lib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.flowpowered</groupId>
+            <artifactId>flow-nbt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
+        <!-- Code-generation -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- Annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>
