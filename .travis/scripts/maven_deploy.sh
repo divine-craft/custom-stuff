@@ -4,4 +4,4 @@
 
 mvn deploy \
 --settings ./.travis/maven/maven-central-settings.xml \
---activate-profiles build-extras,sign-artifacts,import-env-code-signing-credentials
+--activate-profiles build-extras,sign-artifacts,import-env-code-signing-credentials,sonatype-ossrh-deployment
