@@ -7,9 +7,7 @@ deploy:
     edge: true
     script: ./.travis/scripts/maven_deploy.sh
     on:
-      # Two branches are used for deployment:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development)$
+      branch: development
 
 cache:
   directories:
