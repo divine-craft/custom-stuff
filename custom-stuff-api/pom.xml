@@ -38,6 +38,16 @@
                             <shadedPattern>${rootPackage}.nbt</shadedPattern>
                         </relocation>
                     </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>de.tr7zw:*</artifact>
+                            <excludes>
+                                <exclude>LICENSE</exclude>
+                                <exclude>META-INF/MANIFEST.MF</exclude>
+                                <exclude>META-INF/maven/*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                 </configuration>
             </plugin>
         </plugins>
