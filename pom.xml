@@ -106,6 +106,7 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>3.2.0</version>
                     <configuration>
+                        <source>8</source>
                         <tags>
                             <tag>
                                 <name>apiNote</name>
@@ -141,8 +142,8 @@
 
     <repositories>
         <repository>
-            <id>papermc-repo</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <!-- Required for NBT API -->
@@ -155,8 +156,8 @@
         <dependencies>
             <!-- Runtime -->
             <dependency>
-                <groupId>com.destroystokyo.paper</groupId>
-                <artifactId>paper-api</artifactId>
+                <groupId>org.spigotmc</groupId>
+                <artifactId>spigot-api</artifactId>
                 <version>1.12.2-R0.1-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
@@ -268,7 +269,7 @@
             </build>
         </profile>
         <profile>
-            <id>sign-binaries</id>
+            <id>sign-artifacts</id>
             <build>
                 <plugins>
                     <plugin>
