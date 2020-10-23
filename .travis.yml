@@ -1,5 +1,16 @@
 language: java
 
+before_deploy: ./.travis/scripts/import_code_signing_keys.sh
+
+deploy:
+  - provider: script
+    edge: true
+    script: ./.travis/scripts/maven_deploy.sh
+    on:
+      # Two branches are used for deployment:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|development)$
+
 cache:
   directories:
     - ~/.m2/repository

@@ -268,7 +268,7 @@
             </build>
         </profile>
         <profile>
-            <id>sign-binaries</id>
+            <id>sign-artifacts</id>
             <build>
                 <plugins>
                     <plugin>
