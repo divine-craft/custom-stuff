@@ -294,7 +294,7 @@
             </build>
         </profile>
         <profile>
-            <id>sonatype-ossrh-deployment</id>
+            <id>sonatype-ossrh-deployment-auto-release</id>
             <build>
                 <plugins>
                     <plugin>
