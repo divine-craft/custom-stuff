@@ -154,6 +154,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Own dependencies -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>custom-stuff-api</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+
             <!-- Runtime -->
             <dependency>
                 <groupId>org.spigotmc</groupId>
