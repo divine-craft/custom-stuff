@@ -173,6 +173,10 @@
                 <artifactId>minecraft-commons</artifactId>
                 <version>${version.minecraft-utils}</version>
             </dependency>
+            <!--
+            Note: While this is not in use by the API itself, it still is required to be present at runtime
+            as a lot of naive logic may be based on it.
+            -->
             <dependency>
                 <groupId>ru.progrm-jarvis.minecraft</groupId>
                 <artifactId>fake-entity-lib</artifactId>
