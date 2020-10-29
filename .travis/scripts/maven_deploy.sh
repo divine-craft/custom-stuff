@@ -11,4 +11,4 @@ else
 fi
 echo "Using maven profiles: [${maven_profiles}]"
 
-mvn deploy --settings ./.travis/maven/maven-central-settings.xml --activate-profiles "${maven_profiles}"
+mvn deploy --settings ./.travis/maven/settings.xml --activate-profiles "${maven_profiles}"
