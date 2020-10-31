@@ -288,11 +288,7 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
-                                    <gpgArguments>
-                                        <!-- This enabled password input from stdin -->
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
+                                    <useAgent>true</useAgent>
                                 </configuration>
                             </execution>
                         </executions>

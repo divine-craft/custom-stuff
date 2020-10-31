@@ -12,12 +12,8 @@
     <profiles>
         <profile>
             <id>import-env-code-signing-credentials</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
-                <gpg.executable>gpg2</gpg.executable>
-                <gpg.useagent>true</gpg.useagent>
+                <gpg.executable>gpg</gpg.executable>
                 <gpg.keyname>${env.CODE_SIGNING_GPG_KEY_NAME}</gpg.keyname>
                 <gpg.passphrase>${env.CODE_SIGNING_GPG_KEY_PASSPHRASE}</gpg.passphrase>
             </properties>
