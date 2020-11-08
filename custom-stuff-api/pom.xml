@@ -5,7 +5,7 @@
     <parent>
         <artifactId>custom-stuff</artifactId>
         <groupId>ru.divinecraft</groupId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
     <artifactId>custom-stuff-api</artifactId>
 
