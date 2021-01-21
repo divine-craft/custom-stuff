@@ -21,6 +21,7 @@ public interface ItemStackBuilder<M extends ItemMeta> {
     @NotNull ItemStackBuilder<M> amount(int amount);
 
     @Contract("_ -> this")
+    @Deprecated // now only applicable to Damageable
     @NotNull ItemStackBuilder<M> damage(short damage);
 
     @Contract("_ -> this")

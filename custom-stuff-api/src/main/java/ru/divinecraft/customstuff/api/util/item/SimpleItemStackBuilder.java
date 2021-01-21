@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +29,7 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
 
     @Setter @NonNull Material type;
     @Setter int amount = 1;
-    @Setter short damage;
+    short damage;
     @Nullable M meta;
 
     protected SimpleItemStackBuilder(final @NonNull ItemFactory itemFactory) {
@@ -54,6 +55,13 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
         }
 
         return thisMeta;
+    }
+
+    @Override
+    public @NotNull ItemStackBuilder<M> damage(final short damage) {
+        ((Damageable) nonNullMeta()).setDamage(damage);
+
+        return this;
     }
 
     @Override
@@ -100,7 +108,7 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
         final Material thisType;
         checkState((thisType = type) != null, "Type is unset");
 
-        val item = new ItemStack(thisType, amount, damage);
+        val item = new ItemStack(thisType, amount);
         final M thisMeta;
         if ((thisMeta = meta) != null) item.setItemMeta(thisMeta);
 

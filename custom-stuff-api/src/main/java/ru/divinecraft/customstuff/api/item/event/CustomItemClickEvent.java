@@ -28,7 +28,7 @@ public class CustomItemClickEvent extends Event implements Cancellable {
     @NotNull Action action;
     @NotNull BlockFace blockFace;
     boolean mainHand;
-    @NotNull Block block;
+    @Nullable Block block;
 
     @Override
     public HandlerList getHandlers() {
