@@ -19,6 +19,7 @@ public class StaticCustomBlock extends AbstractCustomBlock {
     @Getter @NotNull BlockProperties properties;
     @Nullable CompoundMap nbtTags;
 
+    @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType") // constructor
     protected StaticCustomBlock(final @NotNull String typeName, final @NotNull BlockProperties properties,
                                 final @NotNull CustomBlockManager manager,
                                 final @NotNull Location location,
@@ -32,7 +33,8 @@ public class StaticCustomBlock extends AbstractCustomBlock {
 
     @Override
     public @Nullable CompoundMap readNbtTags() {
-        return nbtTags;
+        final CompoundMap tags;
+        return (tags = nbtTags) == null ? null : new CompoundMap(nbtTags);
     }
 
     public static CustomBlock create(final @NotNull String typeName,

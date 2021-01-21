@@ -21,6 +21,7 @@ public class StaticCustomItem extends AbstractCustomItem {
     @Getter @Nullable String blockTypeName;
     @Getter @Nullable CompoundMap blockNbtTags;
 
+    @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType") // constructor
     protected StaticCustomItem(final @NotNull String typeName,
                                final @NotNull ItemProperties properties,
                                final @NotNull CustomItemManager itemManager,

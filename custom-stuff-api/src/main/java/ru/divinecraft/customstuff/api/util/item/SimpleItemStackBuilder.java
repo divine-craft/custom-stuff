@@ -97,7 +97,7 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
     @SuppressWarnings("unchecked")
     public @NotNull <MNew extends ItemMeta> ItemStackBuilder<MNew> meta(@NonNull final MNew meta) {
         @SuppressWarnings("LocalVariableOfConcreteClass") final SimpleItemStackBuilder<MNew> self;
-        //noinspection CastToConcreteClass
+        //noinspection CastToConcreteClass,AccessingNonPublicFieldOfAnotherObject
         (self = (SimpleItemStackBuilder<MNew>) this).meta = meta;
 
         return self;

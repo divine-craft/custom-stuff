@@ -3,6 +3,7 @@ package ru.divinecraft.customstuff.api.item.manager;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+@SuppressWarnings("PublicConstructor") // exception class
 public class UnknownItemTypeException extends RuntimeException {
 
     public UnknownItemTypeException(final String message) {

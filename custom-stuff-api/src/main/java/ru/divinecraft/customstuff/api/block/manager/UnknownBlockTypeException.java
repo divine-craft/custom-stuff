@@ -3,6 +3,7 @@ package ru.divinecraft.customstuff.api.block.manager;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
+@SuppressWarnings("PublicConstructor") // exception class
 public class UnknownBlockTypeException extends RuntimeException {
 
     public UnknownBlockTypeException(final String message) {

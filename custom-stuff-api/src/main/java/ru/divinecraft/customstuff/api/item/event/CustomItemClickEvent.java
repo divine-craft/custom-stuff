@@ -19,7 +19,7 @@ import ru.divinecraft.customstuff.api.item.CustomItem;
 @SuppressWarnings("PublicMethodNotExposedInInterface")
 public class CustomItemClickEvent extends Event implements Cancellable {
 
-    private static final HandlerList HANDLER_LIST = new HandlerList();
+    private static final @NotNull HandlerList HANDLER_LIST = new HandlerList();
 
     @Setter @NonFinal boolean cancelled = false;
 
@@ -31,11 +31,11 @@ public class CustomItemClickEvent extends Event implements Cancellable {
     @Nullable Block block;
 
     @Override
-    public HandlerList getHandlers() {
+    public @NotNull HandlerList getHandlers() {
         return HANDLER_LIST;
     }
 
-    public static HandlerList getHandlerList() {
+    public static @NotNull HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
 }

@@ -6,6 +6,7 @@ import lombok.NonNull;
  * Public APi for registering custom blocks before {@link CustomItemManager} is created.
  * This should be registered as a service for the time of loading.
  */
+@FunctionalInterface
 public interface LoadingCustomItemManager {
 
     void registerCustomItem(@NonNull String customItemTypeName,

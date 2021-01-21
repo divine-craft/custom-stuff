@@ -52,10 +52,6 @@ public interface CustomBlockManager {
     // returns not-null value <=> block exists but was not exploded
     @Nullable CustomBlock tryExplodeBlock(@NotNull Location location, float yield);
 
-    // void loadBlockChunk(Chunk chunk);
-
-    // void unloadBlockChunk(Chunk chunk);
-
     /**
      * An object responsible for creating exact blocks.
      */
