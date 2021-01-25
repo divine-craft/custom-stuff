@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.inventory.ItemFactory;
@@ -29,8 +31,8 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
 
     @Setter @NonNull Material type;
     @Setter int amount = 1;
-    short damage;
     @Nullable M meta;
+    @Nullable BaseComponent rawName;
 
     protected SimpleItemStackBuilder(final @NonNull ItemFactory itemFactory) {
         this.itemFactory = itemFactory;
@@ -60,6 +62,13 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
     @Override
     public @NotNull ItemStackBuilder<M> damage(final short damage) {
         ((Damageable) nonNullMeta()).setDamage(damage);
+
+        return this;
+    }
+
+    @Override
+    public @NotNull ItemStackBuilder<M> rawName(final @Nullable BaseComponent rawName) {
+        this.rawName = rawName;
 
         return this;
     }
@@ -103,22 +112,37 @@ public class SimpleItemStackBuilder<M extends ItemMeta> implements ItemStackBuil
         return self;
     }
 
-    @Override
-    public @NotNull ItemStack build() {
+    protected @NotNull NBTItem buildNBTItem() {
         final Material thisType;
         checkState((thisType = type) != null, "Type is unset");
 
-        val item = new ItemStack(thisType, amount);
-        final M thisMeta;
-        if ((thisMeta = meta) != null) item.setItemMeta(thisMeta);
+        final NBTItem nbtItem;
+        {
+            val item = new ItemStack(thisType, amount);
+            final M thisMeta;
+            if ((thisMeta = meta) != null) item.setItemMeta(thisMeta);
 
-        return item;
+            nbtItem = new NBTItem(item);
+        }
+        {
+            final BaseComponent thisRawName;
+            if ((thisRawName = rawName) != null) nbtItem
+                    .addCompound("display")
+                    .setString("Name", ComponentSerializer.toString(thisRawName));
+        }
+
+        return nbtItem;
     }
 
     @Override
-    public @NotNull ItemStack build(@NonNull final Consumer<NBTItem> nbtModifier) {
+    public @NotNull ItemStack build() {
+        return buildNBTItem().getItem();
+    }
+
+    @Override
+    public @NotNull ItemStack build(@NonNull final Consumer<@NotNull NBTItem> nbtModifier) {
         final NBTItem nbtItem;
-        nbtModifier.accept(nbtItem = new NBTItem(build()));
+        nbtModifier.accept(nbtItem = buildNBTItem());
 
         return nbtItem.getItem();
     }
