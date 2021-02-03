@@ -8,6 +8,7 @@ import lombok.val;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -146,7 +147,7 @@ public class NbtConversionUtil {
     }
 
     public void addTagsToNbtCompound(final @NotNull NBTCompound compound,
-                                     final @NotNull CompoundMap tags) {
+                                     final @NotNull Map<@NotNull String, @NotNull Tag<?>> tags) {
         //@formatter:off
         for (val entry : tags.entrySet()) switch (entry.getValue().getType()) {
             //formatter:on

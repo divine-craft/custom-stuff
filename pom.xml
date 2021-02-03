@@ -141,12 +141,18 @@
     </build>
 
     <repositories>
+        <!-- spigot-api -->
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <!-- minecraft-utils snapshots -->
         <repository>
-            <!-- Required for NBT API -->
+            <id>sonatype-ossrh</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+        <!-- item-nbt-api -->
+        <repository>
             <id>codemc-repo</id>
             <url>https://repo.codemc.org/repository/maven-public/</url>
         </repository>
@@ -165,7 +171,7 @@
             <dependency>
                 <groupId>org.spigotmc</groupId>
                 <artifactId>spigot-api</artifactId>
-                <version>1.12.2-R0.1-SNAPSHOT</version>
+                <version>1.16.5-R0.1-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
 

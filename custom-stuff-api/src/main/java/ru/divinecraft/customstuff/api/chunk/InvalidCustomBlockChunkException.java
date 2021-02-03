@@ -3,6 +3,7 @@ package ru.divinecraft.customstuff.api.chunk;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@SuppressWarnings("PublicConstructor") // exception class
 public class InvalidCustomBlockChunkException extends RuntimeException {
 
     public InvalidCustomBlockChunkException(final String message) {

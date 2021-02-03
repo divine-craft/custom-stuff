@@ -50,7 +50,7 @@ public interface CustomItem {
      */
 
     default boolean onClick(@NotNull Player player, @NotNull Action action, @NotNull BlockFace blockFace,
-                            boolean mainHand, @NotNull Block block) { return false; }
+                            boolean mainHand, @Nullable Block block) { return false; }
 
     ///////////////////////////////////////////////////////////////////////////
     // Utility-methods for tag-writing

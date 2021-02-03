@@ -8,14 +8,6 @@ public interface RenderedCustomBlock extends AutoCloseable {
 
     void rotate(float xRotation, float yRotation, float zRotation);
 
-    /*
-    void rotate(@NotNull BlockFace direction);
-
-    void rotate(float dxRotation, float dyRotation, float dzRotation);
-
-    void rotateTo(float xRotation, float yRotation, float zRotation);
-    */
-
     void update(@NotNull CustomBlockRenderingProperties properties);
 
     @Override

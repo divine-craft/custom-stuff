@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ArrayBasedChunkDataStorageTest {
 
-    ChunkDataStorage<String> chunkDataStorage;
+    private ChunkDataStorage<String> chunkDataStorage;
 
     @BeforeEach
     void setUp() {
@@ -77,10 +77,12 @@ class ArrayBasedChunkDataStorageTest {
 
     @Test
     void testSetFromEmpty() {
-        for (int y = 0; y < 256; ++y) for (byte x = 0; x < 16; ++x) for (byte z = 0; z < 16; ++z) {
-            val byteY = (byte) y;
-            Assertions.assertNull(chunkDataStorage.get(x, byteY, z));
-        }
+        for (int y = 0; y < 256; ++y)
+            for (byte x = 0; x < 16; ++x)
+                for (byte z = 0; z < 16; ++z) {
+                    val byteY = (byte) y;
+                    Assertions.assertNull(chunkDataStorage.get(x, byteY, z));
+                }
     }
 
     @Test
