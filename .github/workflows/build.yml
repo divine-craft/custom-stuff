@@ -23,10 +23,7 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        env:
-          PACKAGE_REGISTRY_USERNAME: ${{ secrets.PACKAGE_REGISTRY_USERNAME }}
-          PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
-        run: mvn -B package -s ./.github-actions/maven/minimal-settings.xml
+        run: mvn -B package
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
