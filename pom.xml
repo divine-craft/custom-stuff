@@ -46,7 +46,7 @@
         <java.version>1.8</java.version>
         <!-- Dependency versions -->
         <version.minecraft-utils>0.1.0-SNAPSHOT</version.minecraft-utils>
-        <version.junit>5.7.1</version.junit>
+        <version.junit>5.8.0-M1</version.junit>
     </properties>
 
     <scm>
@@ -235,6 +235,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-params</artifactId>
                 <version>${version.junit}</version>
                 <scope>test</scope>
             </dependency>
