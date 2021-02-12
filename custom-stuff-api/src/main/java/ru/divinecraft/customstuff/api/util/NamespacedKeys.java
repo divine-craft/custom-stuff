@@ -7,6 +7,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 /**
  * Utilities related to {@link org.bukkit.NamespacedKey namespaced keys}.
  */
@@ -74,6 +76,7 @@ public class NamespacedKeys {
                 "Namespaced key should consist of colon-delimited namespace and key"
         );
 
+        //noinspection deprecation
         return new NamespacedKey(
                 namespacedKey.substring(0, delimiterIndex),
                 namespacedKey.substring(delimiterIndex + 1)
@@ -81,14 +84,41 @@ public class NamespacedKeys {
     }
 
     /**
-     * Checks that the given string is a valid namespace for a {@link NamespacedKey namespaced key}.
+     * Parses {@link NamespacedKey namespaced key} from the given {@link String string}.
+     *
+     * @param namespacedKey string representation of the namespaced key
+     * @return parsed namespaced key
+     */
+    public @NotNull Optional<NamespacedKey> tryParse(final @NonNull String namespacedKey) {
+        if (namespacedKey.length() > MAX_NAMESPACED_KEY_LENGTH) throw new IllegalArgumentException(
+                "Namespaced key's string representation cannot be longer than "
+                        + MAX_NAMESPACED_KEY_LENGTH + " characters"
+        );
+
+        final int delimiterIndex;
+        if ((delimiterIndex = namespacedKey.indexOf(':')) == -1) throw new IllegalArgumentException(
+                "Namespaced key should consist of colon-delimited namespace and key"
+        );
+
+        final String namespace;
+        if (!isValidKey(namespace = namespacedKey.substring(0, delimiterIndex))) return Optional.empty();
+
+        final String key;
+        if (!isValidKey(key = namespacedKey.substring(delimiterIndex + 1))) return Optional.empty();
+
+        //noinspection deprecation
+        return Optional.of(new NamespacedKey(namespace, key));
+    }
+
+    /**
+     * Checks that the given char sequence is a valid namespace for a {@link NamespacedKey namespaced key}.
      *
      * @param namespace namespace which should be checked
-     * @return {@code true} if the given string is a valid namespaced of a {@link NamespacedKey namespaced key}
+     * @return {@code true} if the given char sequence is a valid namespaced of a {@link NamespacedKey namespaced key}
      * and {@code false} otherwise
      */
     // `[a-z0-9._-]+`
-    public boolean isValidNamespace(final @NotNull String namespace) {
+    public boolean isValidNamespace(final @NotNull CharSequence namespace) {
         final int length;
         if ((length = namespace.length()) == 0) throw new IllegalArgumentException("Namespace cannot be empty");
         if (length > MAX_NAMESPACE_LENGTH) throw new IllegalArgumentException(
@@ -108,14 +138,14 @@ public class NamespacedKeys {
     }
 
     /**
-     * Checks that the given string is a valid namespace for a {@link NamespacedKey namespaced key}.
+     * Checks that the given char sequence is a valid namespace for a {@link NamespacedKey namespaced key}.
      *
      * @param key key which should be checked
-     * @return {@code true} if the given string is a valid namespaced of a {@link NamespacedKey namespaced key}
+     * @return {@code true} if the given char sequence is a valid namespaced of a {@link NamespacedKey namespaced key}
      * and {@code false} otherwise
      */
     // `[a-z0-9/._-]+`
-    public boolean isValidKey(final @NotNull String key) {
+    public boolean isValidKey(final @NotNull CharSequence key) {
         final int length;
         if ((length = key.length()) == 0) throw new IllegalArgumentException("Key cannot be empty");
         if (length > MAX_KEY_LENGTH) throw new IllegalArgumentException(

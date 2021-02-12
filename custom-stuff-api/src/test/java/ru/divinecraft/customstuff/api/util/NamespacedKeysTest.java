@@ -8,10 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class NamespacedKeysTest {
@@ -58,8 +58,7 @@ class NamespacedKeysTest {
 
     @ParameterizedTest
     @MethodSource("validNamespaceComponents")
-    void parse_valid(final String key, final String value,
-                     final NamespacedKey namespacedKey) {
+    void parse_valid(final String key, final String value, final NamespacedKey namespacedKey) {
         assertEquals(namespacedKey, NamespacedKeys.parse(key + ':' + value));
     }
 
@@ -67,5 +66,17 @@ class NamespacedKeysTest {
     @MethodSource("invalidNamespaceComponents")
     void parse_valid(final String key, final String value) {
         assertThrows(IllegalArgumentException.class, () -> NamespacedKeys.parse(key + ':' + value));
+    }
+
+    @ParameterizedTest
+    @MethodSource("validNamespaceComponents")
+    void tryParse_valid(final String key, final String value, final NamespacedKey namespacedKey) {
+        assertEquals(Optional.of(namespacedKey), NamespacedKeys.tryParse(key + ':' + value));
+    }
+
+    @ParameterizedTest
+    @MethodSource("invalidNamespaceComponents")
+    void tryParse_valid(final String key, final String value) {
+        assertFalse(NamespacedKeys.tryParse(key + ':' + value).isPresent());
     }
 }
