@@ -2,6 +2,7 @@ package ru.divinecraft.customstuff.api.block;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import ru.divinecraft.customstuff.api.block.manager.CustomBlockManager;
@@ -29,7 +30,7 @@ public interface CustomBlocks extends CustomStuffDependantService {
             while (registrations.hasMoreElements()) {
                 final CustomBlockRegistration registration;
                 manager.registerCustomBlock(
-                        (registration = registrations.nextElement()).name(), registration.blockFactory()
+                        (registration = registrations.nextElement()).type(), registration.blockFactory()
                 );
             }
         }
@@ -40,7 +41,7 @@ public interface CustomBlocks extends CustomStuffDependantService {
     interface CustomBlockRegistration {
 
         @Contract(pure = true)
-        @NotNull String name();
+        @NotNull NamespacedKey type();
 
         @Contract(pure = true)
         @NotNull CustomBlockManager.BlockFactory blockFactory();
@@ -52,12 +53,12 @@ public interface CustomBlocks extends CustomStuffDependantService {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     class SimpleCustomBlockRegistration implements CustomBlockRegistration {
 
-        @NonNull String name;
+        @NonNull NamespacedKey type;
         @NonNull CustomBlockManager.BlockFactory blockFactory;
 
-        public static @NotNull CustomBlockRegistration of(final @NonNull String name,
+        public static @NotNull CustomBlockRegistration of(final @NonNull NamespacedKey type,
                                                           final @NonNull CustomBlockManager.BlockFactory blockFactory) {
-            return new SimpleCustomBlockRegistration(name, blockFactory);
+            return new SimpleCustomBlockRegistration(type, blockFactory);
         }
     }
 }

@@ -2,7 +2,9 @@ package ru.divinecraft.customstuff.api.item;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import ru.divinecraft.customstuff.api.item.manager.CustomItemManager;
 import ru.divinecraft.customstuff.api.item.properties.ItemProperties;
@@ -27,7 +29,7 @@ public interface CustomItems extends CustomStuffDependantService {
             while (registrations.hasMoreElements()) {
                 final CustomItemRegistration registration;
                 manager.registerCustomItem(
-                        (registration = registrations.nextElement()).name(), registration.itemFactory()
+                        (registration = registrations.nextElement()).type(), registration.itemFactory()
                 );
             }
         }
@@ -35,18 +37,21 @@ public interface CustomItems extends CustomStuffDependantService {
         loadingCustomStuff.onceReady(customItems::setup);
     }
 
-    static @NotNull CustomItemRegistration blockItemRegistration(final @NotNull String typeName,
+    static @NotNull CustomItemRegistration blockItemRegistration(final @NotNull NamespacedKey type,
                                                                  final @NotNull ItemProperties properties,
                                                                  final @NotNull ItemStack bukkitItem) {
         return SimpleCustomItemRegistration.of(
-                typeName,
-                (manager, nbt) -> StaticCustomItem.create(typeName, properties, manager, bukkitItem, typeName, nbt)
+                type,
+                (manager, nbt) -> StaticCustomItem.create(type, properties, manager, bukkitItem, type, nbt)
         );
     }
 
     interface CustomItemRegistration {
-        @NotNull String name();
 
+        @Contract(pure = true)
+        @NotNull NamespacedKey type();
+
+        @Contract(pure = true)
         @NotNull CustomItemManager.ItemFactory itemFactory();
     }
 
@@ -54,12 +59,12 @@ public interface CustomItems extends CustomStuffDependantService {
     @Accessors(fluent = true)
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     class SimpleCustomItemRegistration implements CustomItemRegistration {
-        @NonNull String name;
+        @NonNull NamespacedKey type;
         @NonNull CustomItemManager.ItemFactory itemFactory;
 
-        public static @NotNull CustomItemRegistration of(final @NonNull String name,
+        public static @NotNull CustomItemRegistration of(final @NonNull NamespacedKey type,
                                                          final @NonNull CustomItemManager.ItemFactory itemFactory) {
-            return new SimpleCustomItemRegistration(name, itemFactory);
+            return new SimpleCustomItemRegistration(type, itemFactory);
         }
     }
 }

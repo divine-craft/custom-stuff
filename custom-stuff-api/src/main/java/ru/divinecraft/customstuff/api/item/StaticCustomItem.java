@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,25 +16,25 @@ import ru.divinecraft.customstuff.api.item.properties.ItemProperties;
 @FieldDefaults(level = AccessLevel.PROTECTED, makeFinal = true)
 public class StaticCustomItem extends AbstractCustomItem {
 
-    @Getter @NotNull String typeName;
+    @Getter @NotNull NamespacedKey type;
     @Getter @NotNull ItemProperties properties;
     @NotNull ItemStack originalItemStack;
-    @Getter @Nullable String blockTypeName;
+    @Getter @Nullable NamespacedKey blockType;
     @Getter @Nullable CompoundMap blockNbtTags;
 
     @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType") // constructor
-    protected StaticCustomItem(final @NotNull String typeName,
+    protected StaticCustomItem(final @NotNull NamespacedKey type,
                                final @NotNull ItemProperties properties,
                                final @NotNull CustomItemManager itemManager,
                                final @NotNull ItemStack originalItemStack,
-                               final @Nullable String blockTypeName,
+                               final @Nullable NamespacedKey blockType,
                                final @Nullable CompoundMap blockNbtTags) {
         super(itemManager);
 
-        this.typeName = typeName;
+        this.type = type;
         this.properties = properties;
         this.originalItemStack = originalItemStack;
-        this.blockTypeName = blockTypeName;
+        this.blockType = blockType;
         this.blockNbtTags = blockNbtTags;
     }
 
@@ -42,12 +43,12 @@ public class StaticCustomItem extends AbstractCustomItem {
         return originalItemStack.clone();
     }
 
-    public static CustomItem create(final @NotNull String typeName,
+    public static CustomItem create(final @NotNull NamespacedKey type,
                                     final @NotNull ItemProperties properties,
                                     final @NotNull CustomItemManager itemManager,
                                     final @NotNull ItemStack originalItemStack,
-                                    final @Nullable String blockTypeName,
+                                    final @Nullable NamespacedKey blockType,
                                     final  @Nullable CompoundMap blockNbtTags) {
-        return new StaticCustomItem(typeName, properties, itemManager, originalItemStack, blockTypeName, blockNbtTags);
+        return new StaticCustomItem(type, properties, itemManager, originalItemStack, blockType, blockNbtTags);
     }
 }

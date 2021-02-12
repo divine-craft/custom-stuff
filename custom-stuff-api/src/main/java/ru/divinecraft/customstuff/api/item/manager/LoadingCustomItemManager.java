@@ -1,6 +1,7 @@
 package ru.divinecraft.customstuff.api.item.manager;
 
 import lombok.NonNull;
+import org.bukkit.NamespacedKey;
 
 /**
  * Public APi for registering custom blocks before {@link CustomItemManager} is created.
@@ -9,6 +10,6 @@ import lombok.NonNull;
 @FunctionalInterface
 public interface LoadingCustomItemManager {
 
-    void registerCustomItem(@NonNull String customItemTypeName,
+    void registerCustomItem(@NonNull NamespacedKey type,
                             @NonNull CustomItemManager.ItemFactory itemFactory);
 }

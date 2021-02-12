@@ -2,6 +2,7 @@ package ru.divinecraft.customstuff.api.block.manager;
 
 import com.flowpowered.nbt.CompoundMap;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
@@ -16,27 +17,27 @@ public interface CustomBlockManager {
     @NotNull LoopPool getLoopPool();
 
     @Contract(pure = true)
-    boolean hasBlockFactory(@NotNull String blockTypeName);
+    boolean hasBlockFactory(@NotNull NamespacedKey type);
 
     @Contract(pure = true)
-    @Nullable BlockFactory getBlockFactory(@NotNull String blockTypeName);
+    @Nullable BlockFactory getBlockFactory(@NotNull NamespacedKey type);
 
     @Nullable CustomBlock getBlock(@NotNull Location location);
 
     @NotNull CustomBlock createBlock(@NotNull Location location,
-                                     @NotNull String blockTypeName,
+                                     @NotNull NamespacedKey type,
                                      @Nullable BlockFace direction,
                                      @Nullable CompoundMap nbtTags);
 
     // null if there is already a block at his location
     @Nullable CustomBlock placeBlock(@NotNull Location location,
-                                     @NotNull String blockTypeName,
+                                     @NotNull NamespacedKey type,
                                      @Nullable BlockFace direction,
                                      @Nullable CompoundMap nbtTags,
                                      @NotNull Player player);
 
     @Nullable CustomBlock placeOrGetBlock(@NotNull Location location,
-                                          @NotNull String blockTypeName,
+                                          @NotNull NamespacedKey type,
                                           @Nullable BlockFace direction,
                                           @Nullable CompoundMap nbtTags,
                                           @NotNull Player player);

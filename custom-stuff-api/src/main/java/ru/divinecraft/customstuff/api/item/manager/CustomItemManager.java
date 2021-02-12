@@ -4,6 +4,7 @@ import com.flowpowered.nbt.CompoundMap;
 import lombok.NonNull;
 import lombok.val;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
@@ -20,22 +21,22 @@ public interface CustomItemManager {
     @NotNull @Unmodifiable Map<String, ItemFactory> getItemFactories();
 
     @Contract(pure = true)
-    @Nullable ItemFactory getItemFactory(@NotNull String typeName);
+    @Nullable ItemFactory getItemFactory(@NotNull NamespacedKey type);
 
     @Contract(pure = true)
-    boolean hasItemFactory(String typeName);
+    boolean hasItemFactory(@NotNull NamespacedKey type);
 
-    @Nullable CustomItem createNewCustomItem(@NotNull String typeName, @Nullable CompoundMap nbtTags);
+    @Nullable CustomItem createNewCustomItem(@NotNull NamespacedKey type, @Nullable CompoundMap nbtTags);
 
     boolean isCustomItem(@Nullable ItemStack item);
 
     @Nullable CustomItem asCustomItem(@Nullable ItemStack item);
 
     @NotNull Item dropItem(@NotNull Location location,
-                           @NotNull String typeName, @Nullable CompoundMap nbtTags);
+                           @NotNull NamespacedKey type, @Nullable CompoundMap nbtTags);
 
     @NotNull Item dropItemNaturally(@NotNull Location location,
-                                    @NotNull String typeName, @Nullable CompoundMap nbtTags);
+                                    @NotNull NamespacedKey type, @Nullable CompoundMap nbtTags);
 
     @FunctionalInterface
     interface ItemCreator {
@@ -73,7 +74,7 @@ public interface CustomItemManager {
         }
 
         @Contract("_, _ -> new")
-        static @NotNull ItemFactory create(final ItemCreator creator,
+        static @NotNull ItemFactory create(final @NonNull ItemCreator creator,
                                            final @Nullable CompoundMap @NonNull ... defaultVariants) {
             val defaultVariantsEnumeration = Collections.enumeration(Arrays.asList(defaultVariants));
 

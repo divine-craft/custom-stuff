@@ -2,6 +2,7 @@ package ru.divinecraft.customstuff.api.block;
 
 import com.flowpowered.nbt.CompoundMap;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
@@ -17,7 +18,7 @@ public interface CustomBlock {
     // Generic block properties
     ///////////////////////////////////////////////////////////////////////////
 
-    @NotNull String getTypeName();
+    @NotNull NamespacedKey getType();
 
     @NotNull BlockProperties getProperties();
 
