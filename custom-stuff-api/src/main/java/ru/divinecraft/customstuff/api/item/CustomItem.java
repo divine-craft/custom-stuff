@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Unmodifiable;
 import ru.divinecraft.customstuff.api.item.properties.ItemProperties;
 import ru.divinecraft.customstuff.api.item.properties.StaticItemProperties;
 import ru.divinecraft.customstuff.api.recipe.ItemStackMatcher;
+import ru.divinecraft.customstuff.api.util.NamespacedKeys;
 
 import java.util.Collections;
 import java.util.Set;
@@ -65,19 +66,29 @@ public interface CustomItem {
         tags.put(typeNameTag(type));
     }
 
-    static @Nullable String readType(final @NotNull CompoundMap tags) {
+    static @Nullable NamespacedKey readType(final @NotNull CompoundMap tags) {
         final Tag<?> tag;
         if ((tag = tags.get(TYPE_TAG_NAME)) != null
-                && tag.getType() == TagType.TAG_STRING) return ((StringTag) tag).getValue();
+                && tag.getType() == TagType.TAG_STRING) return NamespacedKeys.parse(((StringTag) tag).getValue());
 
         return null;
     }
 
-    static @Nullable String readType(final @NotNull NBTCompound tags) {
+    static @Nullable String readRawType(final @NotNull NBTCompound tags) {
         return tags.getString(TYPE_TAG_NAME);
     }
 
-    static @Nullable String readType(final @NotNull NBTItem item) {
+    static @Nullable NamespacedKey readType(final @NotNull NBTCompound tags) {
+        final String tagValue;
+        return (tagValue = tags.getString(TYPE_TAG_NAME)) == null ? null : NamespacedKeys.parse(tagValue);
+    }
+
+    static @Nullable String readRawType(final @NotNull NBTItem item) {
+        final NBTCompound tags;
+        return (tags = item.getCompound(CUSTOM_ITEM_TAG_NAME)) == null ? null : readRawType(tags);
+    }
+
+    static @Nullable NamespacedKey readType(final @NotNull NBTItem item) {
         final NBTCompound tags;
         return (tags = item.getCompound(CUSTOM_ITEM_TAG_NAME)) == null ? null : readType(tags);
     }
@@ -94,7 +105,7 @@ public interface CustomItem {
         val typeName = type.toString();
         return item -> {
             final String actualType;
-            return (actualType = readType(new NBTItem(item))) != null && actualType.equals(typeName);
+            return (actualType = readRawType(new NBTItem(item))) != null && actualType.equals(typeName);
         };
     }
 
@@ -109,7 +120,7 @@ public interface CustomItem {
             @Override
             public boolean matches(@NotNull final ItemStack item) {
                 final String actualType;
-                return (actualType = readType(new NBTItem(item))) != null && actualType.equals(typeName);
+                return (actualType = readRawType(new NBTItem(item))) != null && actualType.equals(typeName);
             }
 
             @Override
