@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.divinecraft.customstuff.api.block.manager.CustomBlockManager;
@@ -15,18 +16,18 @@ import ru.divinecraft.customstuff.api.block.properties.BlockProperties;
 @FieldDefaults(level = AccessLevel.PROTECTED, makeFinal = true)
 public class StaticCustomBlock extends AbstractCustomBlock {
 
-    @Getter @NotNull String typeName;
+    @Getter @NotNull NamespacedKey type;
     @Getter @NotNull BlockProperties properties;
     @Nullable CompoundMap nbtTags;
 
     @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType") // constructor
-    protected StaticCustomBlock(final @NotNull String typeName, final @NotNull BlockProperties properties,
+    protected StaticCustomBlock(final @NotNull NamespacedKey type, final @NotNull BlockProperties properties,
                                 final @NotNull CustomBlockManager manager,
                                 final @NotNull Location location,
                                 final @Nullable CompoundMap nbtTags) {
         super(manager, location);
 
-        this.typeName = typeName;
+        this.type = type;
         this.properties = properties;
         this.nbtTags = nbtTags;
     }
@@ -34,14 +35,14 @@ public class StaticCustomBlock extends AbstractCustomBlock {
     @Override
     public @Nullable CompoundMap readNbtTags() {
         final CompoundMap tags;
-        return (tags = nbtTags) == null ? null : new CompoundMap(nbtTags);
+        return (tags = nbtTags) == null ? null : new CompoundMap(tags);
     }
 
-    public static CustomBlock create(final @NotNull String typeName,
+    public static CustomBlock create(final @NotNull NamespacedKey type,
                                      final @NotNull BlockProperties properties,
                                      final @NotNull CustomBlockManager manager,
                                      final @NotNull Location location,
                                      final @Nullable CompoundMap nbtTags) {
-        return new StaticCustomBlock(typeName, properties, manager, location, nbtTags);
+        return new StaticCustomBlock(type, properties, manager, location, nbtTags);
     }
 }
