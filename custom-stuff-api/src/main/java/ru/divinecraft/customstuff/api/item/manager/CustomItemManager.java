@@ -18,6 +18,9 @@ import java.util.*;
 public interface CustomItemManager {
 
     @Contract(pure = true)
+    @NotNull @Unmodifiable Map<String, ItemFactory> getItemFactories();
+
+    @Contract(pure = true)
     @Nullable ItemFactory getItemFactory(@NotNull NamespacedKey type);
 
     @Contract(pure = true)
