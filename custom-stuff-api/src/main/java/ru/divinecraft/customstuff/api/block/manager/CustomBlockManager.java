@@ -8,10 +8,16 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import ru.divinecraft.customstuff.api.block.CustomBlock;
 import ru.progrm_jarvis.minecraft.commons.schedule.pool.LoopPool;
 
+import java.util.Map;
+
 public interface CustomBlockManager {
+
+    @Contract(pure = true)
+    @NotNull @Unmodifiable Map<@NotNull NamespacedKey, @NotNull BlockFactory> getBlockFactories();
 
     @Contract(pure = true)
     @NotNull LoopPool getLoopPool();
