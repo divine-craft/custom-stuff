@@ -6,8 +6,6 @@ import com.flowpowered.nbt.Tag;
 import com.flowpowered.nbt.TagType;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import lombok.NonNull;
-import lombok.val;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -17,16 +15,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
 import ru.divinecraft.customstuff.api.item.properties.ItemProperties;
 import ru.divinecraft.customstuff.api.item.properties.StaticItemProperties;
-import ru.divinecraft.customstuff.api.recipe.ItemStackMatcher;
 import ru.divinecraft.customstuff.api.util.NamespacedKeys;
-
-import java.util.Collections;
-import java.util.Set;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public interface CustomItem {
 
@@ -99,39 +90,5 @@ public interface CustomItem {
 
     static void writeType(final @NotNull NBTItem tags, final @NotNull NamespacedKey type) {
         writeType(tags.addCompound(CUSTOM_ITEM_TAG_NAME), type);
-    }
-
-    static @NotNull ItemStackMatcher matcherForType(final @NonNull NamespacedKey type) {
-        val typeName = type.toString();
-        return item -> {
-            final String actualType;
-            return (actualType = readRawType(new NBTItem(item))) != null && actualType.equals(typeName);
-        };
-    }
-
-    static @NotNull ItemStackMatcher matcherForType(final @NonNull NamespacedKey type,
-                                                    final @Unmodifiable @Nullable Set<@Unmodifiable @NonNull ItemStack>
-                                                            icons) {
-        if (icons != null) for (val icon
-                : icons) checkNotNull(icon, "None of the items can be null");
-
-        val typeName = type.toString();
-        return new ItemStackMatcher() {
-            @Override
-            public boolean matches(@NotNull final ItemStack item) {
-                final String actualType;
-                return (actualType = readRawType(new NBTItem(item))) != null && actualType.equals(typeName);
-            }
-
-            @Override
-            public @Unmodifiable @Nullable Set<ItemStack> icons() {
-                return icons;
-            }
-        };
-    }
-
-    static @NotNull ItemStackMatcher matcherForType(final @NonNull NamespacedKey type,
-                                                    final @Nullable ItemStack icon) {
-        return matcherForType(type, icon == null ? null : Collections.singleton(icon));
     }
 }

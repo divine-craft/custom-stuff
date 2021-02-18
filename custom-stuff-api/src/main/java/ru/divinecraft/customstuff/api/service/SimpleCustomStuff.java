@@ -7,10 +7,10 @@ import lombok.Value;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
+import ru.divinecraft.customstuff.api.advancement.manager.AdvancementManager;
 import ru.divinecraft.customstuff.api.block.manager.CustomBlockManager;
 import ru.divinecraft.customstuff.api.inventory.manager.CustomInventoryManager;
 import ru.divinecraft.customstuff.api.item.manager.CustomItemManager;
-import ru.divinecraft.customstuff.api.recipe.manager.CustomRecipeManager;
 import ru.divinecraft.customstuff.api.render.CustomBlockRenderer;
 
 @Value
@@ -22,14 +22,16 @@ import ru.divinecraft.customstuff.api.render.CustomBlockRenderer;
     @NonNull CustomBlockManager blockManager;
     @NonNull CustomItemManager itemManager;
     @NonNull CustomInventoryManager inventoryManager;
-    @NonNull CustomRecipeManager recipeManager;
+    @NonNull AdvancementManager advancementManager;
     @NonNull CustomBlockRenderer blockRenderer;
 
     public static CustomStuff create(final @NonNull CustomBlockManager blockManager,
                                      final @NonNull CustomItemManager itemManager,
                                      final @NonNull CustomInventoryManager inventoryManager,
-                                     final @NonNull CustomRecipeManager recipeManager,
+                                     final @NonNull AdvancementManager advancementManager,
                                      final @NonNull CustomBlockRenderer blockRenderer) {
-        return new SimpleCustomStuff(blockManager, itemManager, inventoryManager, recipeManager, blockRenderer);
+        return new SimpleCustomStuff(
+                blockManager, itemManager, inventoryManager, advancementManager, blockRenderer
+        );
     }
 }
