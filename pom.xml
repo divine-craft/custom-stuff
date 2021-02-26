@@ -164,6 +164,7 @@
                 <groupId>ru.divinecraft</groupId>
                 <artifactId>zaraza-common-api</artifactId>
                 <version>${version.zaraza}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
