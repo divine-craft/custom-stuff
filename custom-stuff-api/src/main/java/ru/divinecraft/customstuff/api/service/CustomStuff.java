@@ -7,7 +7,9 @@ import ru.divinecraft.customstuff.api.inventory.manager.CustomInventoryManager;
 import ru.divinecraft.customstuff.api.item.manager.CustomItemManager;
 import ru.divinecraft.customstuff.api.recipe.manager.RecipeManager;
 import ru.divinecraft.customstuff.api.render.CustomBlockRenderer;
+import ru.divinecraft.zaraza.common.api.annotation.BukkitService;
 
+@BukkitService("CustomStuff")
 public interface CustomStuff {
 
     @Contract(pure = true)

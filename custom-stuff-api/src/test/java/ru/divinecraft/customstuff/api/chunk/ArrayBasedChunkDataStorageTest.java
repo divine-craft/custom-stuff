@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.progrm_jarvis.javacommons.pair.SimplePair;
+import ru.progrm_jarvis.javacommons.object.Pair;
 
 import java.util.NoSuchElementException;
 import java.util.stream.StreamSupport;
@@ -22,7 +22,7 @@ class ArrayBasedChunkDataStorageTest {
     @BeforeEach
     void setUp() {
         chunkDataStorage = ArrayBasedChunkDataStorage.withAllocator(
-                new ArrayBasedChunkDataStorage.LayerAllocator<String>() {
+                new ArrayBasedChunkDataStorage.LayerAllocator<>() {
                     @Override
                     public @Nullable String @NotNull [] @Nullable [] allocateLayers() {
                         return new String[LAYERS_COUNT][];
@@ -216,7 +216,7 @@ class ArrayBasedChunkDataStorageTest {
         chunkDataStorage.set((byte) 1, (byte) 7, (byte) 2, "cyanide");
 
         assertThat(StreamSupport.stream(chunkDataStorage.spliterator(), false)).containsExactly(
-                SimplePair.of(new Vector(1, 7, 2), "cyanide")
+                Pair.of(new Vector(1, 7, 2), "cyanide")
         );
     }
 
@@ -227,9 +227,9 @@ class ArrayBasedChunkDataStorageTest {
         chunkDataStorage.set((byte) 1, (byte) 8, (byte) 10, "happiness");
 
         assertThat(StreamSupport.stream(chunkDataStorage.spliterator(), false)).containsExactly(
-                SimplePair.of(new Vector(1, 7, 2), "cyanide"),
-                SimplePair.of(new Vector(1, 8, 0), "and"),
-                SimplePair.of(new Vector(1, 8, 10), "happiness")
+                Pair.of(new Vector(1, 7, 2), "cyanide"),
+                Pair.of(new Vector(1, 8, 0), "and"),
+                Pair.of(new Vector(1, 8, 10), "happiness")
         );
     }
 
@@ -248,17 +248,17 @@ class ArrayBasedChunkDataStorageTest {
         chunkDataStorage.set((byte) 15, (byte) 255, (byte) 15, "close to border #6");
 
         assertThat(StreamSupport.stream(chunkDataStorage.spliterator(), false)).containsExactly(
-                SimplePair.of(new Vector(0, 0, 0), "zero"),
-                SimplePair.of(new Vector(0, 0, 1), "practically zero"),
-                SimplePair.of(new Vector(1, 7, 2), "cyanide"),
-                SimplePair.of(new Vector(1, 8, 0), "and"),
-                SimplePair.of(new Vector(1, 8, 10), "happiness"),
-                SimplePair.of(new Vector(1, 254, 10), "close to border #1"),
-                SimplePair.of(new Vector(1, 255, 10), "close to border #2"),
-                SimplePair.of(new Vector(14, 255, 14), "close to border #3"),
-                SimplePair.of(new Vector(14, 255, 15), "close to border #4"),
-                SimplePair.of(new Vector(15, 255, 14), "close to border #5"),
-                SimplePair.of(new Vector(15, 255, 15), "close to border #6")
+                Pair.of(new Vector(0, 0, 0), "zero"),
+                Pair.of(new Vector(0, 0, 1), "practically zero"),
+                Pair.of(new Vector(1, 7, 2), "cyanide"),
+                Pair.of(new Vector(1, 8, 0), "and"),
+                Pair.of(new Vector(1, 8, 10), "happiness"),
+                Pair.of(new Vector(1, 254, 10), "close to border #1"),
+                Pair.of(new Vector(1, 255, 10), "close to border #2"),
+                Pair.of(new Vector(14, 255, 14), "close to border #3"),
+                Pair.of(new Vector(14, 255, 15), "close to border #4"),
+                Pair.of(new Vector(15, 255, 14), "close to border #5"),
+                Pair.of(new Vector(15, 255, 15), "close to border #6")
         );
     }
 }

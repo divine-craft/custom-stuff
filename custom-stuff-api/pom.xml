@@ -60,20 +60,12 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ru.divinecraft</groupId>
+            <artifactId>zaraza-common-api</artifactId>
+        </dependency>
 
         <!-- Libraries -->
-        <dependency>
-            <groupId>ru.progrm-jarvis</groupId>
-            <artifactId>java-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ru.progrm-jarvis.minecraft</groupId>
-            <artifactId>minecraft-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ru.progrm-jarvis.minecraft</groupId>
-            <artifactId>fake-entity-lib</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.flowpowered</groupId>
             <artifactId>flow-nbt</artifactId>

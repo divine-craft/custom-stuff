@@ -223,7 +223,7 @@ public class NbtUtil {
     }
 
     public long readLong(final @NotNull CompoundMap tags, final @NotNull String tagName,
-                       final long defaultValue) {
+                         final long defaultValue) {
         final Tag<?> tag;
         if ((tag = tags.get(tagName)) == null) return defaultValue;
 
@@ -237,7 +237,7 @@ public class NbtUtil {
     }
 
     public long readLong(final @NotNull CompoundMap tags, final @NotNull String tagName,
-                        final LongSupplier defaultValueSupplier) {
+                         final LongSupplier defaultValueSupplier) {
         final Tag<?> tag;
         if ((tag = tags.get(tagName)) == null) return defaultValueSupplier.getAsLong();
 

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import ru.divinecraft.customstuff.api.block.properties.BlockProperties;
-import ru.progrm_jarvis.javacommons.annotation.ownership.Own;
+import ru.progrm_jarvis.javacommons.ownership.annotation.Own;
 
 public interface CustomBlock {
 

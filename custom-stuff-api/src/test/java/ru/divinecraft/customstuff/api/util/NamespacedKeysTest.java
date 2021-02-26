@@ -1,7 +1,6 @@
 package ru.divinecraft.customstuff.api.util;
 
 import lombok.val;
-import lombok.var;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,6 +15,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class NamespacedKeysTest {
 
+    @SuppressWarnings("deprecation") // creation of NamespacedKey
     static @NotNull Stream<@NotNull Arguments> validNamespaceComponents() {
         return Stream.of(
                 arguments("hello", "world", new NamespacedKey("hello", "world"))
@@ -23,12 +23,7 @@ class NamespacedKeysTest {
     }
 
     static @NotNull Stream<@NotNull Arguments> invalidNamespaceComponents() {
-        final String hugeString;
-        {
-            val hugeStringBuilder = new StringBuilder();
-            for (var i = 0; i < 255; i++) hugeStringBuilder.append('a');
-            hugeString = hugeStringBuilder.toString();
-        }
+        val hugeString = "a".repeat(255);
 
         return Stream.of(
                 arguments("ohyeah", "just great"),
