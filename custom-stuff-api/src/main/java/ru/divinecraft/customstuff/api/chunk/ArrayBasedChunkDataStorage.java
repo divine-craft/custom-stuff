@@ -6,8 +6,7 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ru.progrm_jarvis.javacommons.pair.Pair;
-import ru.progrm_jarvis.javacommons.pair.SimplePair;
+import ru.progrm_jarvis.javacommons.object.Pair;
 
 import java.util.*;
 
@@ -223,7 +222,7 @@ public class ArrayBasedChunkDataStorage<@NotNull T> implements ChunkDataStorage<
                 T value;
                 if ((value = layer[xz]) != null) {
                     // next was found
-                    next = SimplePair.of(new Vector(xFromIndexXZ(xz), y, zFromIndexXZ(xz)), value);
+                    next = Pair.of(new Vector(xFromIndexXZ(xz), y, zFromIndexXZ(xz)), value);
 
                     // check if this layer has ended
                     if ((this.leftOnCurrentLayer = --leftOnCurrentLayer) == 0) this.layer = null;

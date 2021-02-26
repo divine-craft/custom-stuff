@@ -43,9 +43,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <!-- Dependency versions -->
-        <version.minecraft-utils>0.1.0-SNAPSHOT</version.minecraft-utils>
+        <version.zaraza>1.0.0-SNAPSHOT</version.zaraza>
         <version.junit>5.8.0-M1</version.junit>
     </properties>
 
@@ -79,8 +79,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
                     <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
+                        <release>${java.version}</release>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -143,17 +142,17 @@
     <repositories>
         <!-- spigot-api -->
         <repository>
-            <id>spigot-repo</id>
+            <id>spigotmc</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
-        <!-- minecraft-utils snapshots -->
+        <!-- padla snapshots, minecraft-utils snapshots -->
         <repository>
             <id>sonatype-ossrh</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <!-- item-nbt-api -->
         <repository>
-            <id>codemc-repo</id>
+            <id>codemc</id>
             <url>https://repo.codemc.org/repository/maven-public/</url>
         </repository>
     </repositories>
@@ -161,6 +160,11 @@
     <dependencyManagement>
         <dependencies>
             <!-- Own dependencies -->
+            <dependency>
+                <groupId>ru.divinecraft</groupId>
+                <artifactId>zaraza-common-api</artifactId>
+                <version>${version.zaraza}</version>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>custom-stuff-api</artifactId>
@@ -176,25 +180,6 @@
             </dependency>
 
             <!-- Libraries -->
-            <dependency>
-                <groupId>ru.progrm-jarvis</groupId>
-                <artifactId>java-commons</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>ru.progrm-jarvis.minecraft</groupId>
-                <artifactId>minecraft-commons</artifactId>
-                <version>${version.minecraft-utils}</version>
-            </dependency>
-            <!--
-            Note: While this is not in use by the API itself, it still is required to be present at runtime
-            as a lot of naive logic may be based on it.
-            -->
-            <dependency>
-                <groupId>ru.progrm-jarvis.minecraft</groupId>
-                <artifactId>fake-entity-lib</artifactId>
-                <version>${version.minecraft-utils}</version>
-            </dependency>
             <dependency>
                 <groupId>com.flowpowered</groupId>
                 <artifactId>flow-nbt</artifactId>

@@ -2,7 +2,6 @@ package ru.divinecraft.customstuff.api.util;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
-import lombok.var;
 import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
