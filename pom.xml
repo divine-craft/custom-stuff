@@ -45,6 +45,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <!-- Dependency versions -->
+        <version.custom-stuff>1.1.0-SNAPSHOT</version.custom-stuff>
         <version.zaraza>1.0.0-SNAPSHOT</version.zaraza>
         <version.junit>5.8.0-M1</version.junit>
     </properties>
@@ -159,17 +160,19 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Own dependencies -->
+            <!-- Basic DivineCraft dependencies -->
             <dependency>
                 <groupId>ru.divinecraft</groupId>
                 <artifactId>zaraza-common-api</artifactId>
                 <version>${version.zaraza}</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Own modules (to be referenced by children) -->
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>ru.divinecraft</groupId>
                 <artifactId>custom-stuff-api</artifactId>
-                <version>${project.version}</version>
+                <version>${version.custom-stuff}</version>
             </dependency>
 
             <!-- Runtime -->
