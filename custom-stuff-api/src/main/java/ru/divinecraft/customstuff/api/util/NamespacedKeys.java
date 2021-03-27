@@ -38,8 +38,8 @@ public class NamespacedKeys {
      *
      * @throws IllegalArgumentException if namespaced key cannot be created from given namespace and key
      */
+    @SuppressWarnings("deprecation")
     public @NotNull NamespacedKey of(final @NotNull String namespace, final @NotNull String key) {
-        //noinspection deprecation
         return new NamespacedKey(namespace, key);
     }
 
