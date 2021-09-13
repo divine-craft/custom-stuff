@@ -47,7 +47,7 @@
         <!-- Dependency versions -->
         <version.custom-stuff>1.1.0-SNAPSHOT</version.custom-stuff>
         <version.zaraza>1.0.0-SNAPSHOT</version.zaraza>
-        <version.junit>5.8.0-M1</version.junit>
+        <version.junit>5.8.0</version.junit>
     </properties>
 
     <scm>
