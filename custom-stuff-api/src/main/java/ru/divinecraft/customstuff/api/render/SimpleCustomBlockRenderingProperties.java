@@ -10,15 +10,17 @@ import org.jetbrains.annotations.NotNull;
 @Accessors(fluent = true)
 public class SimpleCustomBlockRenderingProperties implements CustomBlockRenderingProperties {
 
-    @NonNull ItemStack displayedItem;
-    @NotNull RenderingHint @NonNull [] renderingHints;
+    @NotNull ItemStack displayedItem;
+    @NotNull RenderingHint @NotNull [] renderingHints;
 
-    public static CustomBlockRenderingProperties create(final @NonNull ItemStack renderItem) {
+    public static @NotNull CustomBlockRenderingProperties create(final @NonNull ItemStack renderItem) {
         return new SimpleCustomBlockRenderingProperties(renderItem, RenderingHint.none());
     }
 
-    public static CustomBlockRenderingProperties create(final @NonNull ItemStack renderItem,
-                                                        final @NotNull RenderingHint @NonNull ... renderingHints) {
-        return new SimpleCustomBlockRenderingProperties(renderItem, RenderingHint.none());
+    public static @NotNull CustomBlockRenderingProperties create(
+            final @NonNull ItemStack renderItem,
+            final @NotNull RenderingHint @NonNull ... renderingHints
+    ) {
+        return new SimpleCustomBlockRenderingProperties(renderItem, renderingHints);
     }
 }
