@@ -3,6 +3,7 @@ package ru.divinecraft.customstuff.api.render;
 import lombok.NonNull;
 import lombok.Value;
 import lombok.experimental.Accessors;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,5 +23,25 @@ public class SimpleCustomBlockRenderingProperties implements CustomBlockRenderin
             final @NotNull RenderingHint @NonNull ... renderingHints
     ) {
         return new SimpleCustomBlockRenderingProperties(renderItem, renderingHints);
+    }
+
+    /**
+     * Creates empty rendering properties.
+     *
+     * @return empty rendering properties
+     */
+    public static @NotNull CustomBlockRenderingProperties empty() {
+        return EmptyHolder.INSTANCE;
+    }
+
+    /**
+     * Holder of empty rendering properties.
+     */
+    private static final class EmptyHolder {
+
+        /**
+         * Singleton instance of empty rendering properties.
+         */
+        private static final @NotNull CustomBlockRenderingProperties INSTANCE = create(new ItemStack(Material.AIR));
     }
 }

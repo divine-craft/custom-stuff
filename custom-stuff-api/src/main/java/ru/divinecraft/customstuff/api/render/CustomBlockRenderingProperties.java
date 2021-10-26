@@ -13,7 +13,7 @@ public interface CustomBlockRenderingProperties {
      *
      * @return item used for displaying this block
      */
-    ItemStack displayedItem();
+    @NotNull ItemStack displayedItem();
 
     // no default implementation so that callers store the value in constant field
     @NotNull RenderingHint @NotNull [] renderingHints();
