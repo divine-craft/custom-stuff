@@ -30,6 +30,7 @@ public interface CustomBlockManager {
 
     @Nullable CustomBlock getBlock(@NotNull Location location);
 
+    @Deprecated // this does not register the block in a chunk and is only used by chunk readers implementations
     @NotNull CustomBlock createBlock(@NotNull Location location,
                                      @NotNull NamespacedKey type,
                                      @Nullable BlockFace direction,
